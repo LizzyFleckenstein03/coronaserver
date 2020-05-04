@@ -60,6 +60,7 @@ minetest.register_chatcommand("remove_from_allprivs", {
 		end
 		rmpriv(coronaserver.savedata.revokeall)
 		rmpriv(coronaserver.savedata.grantall)
+		coronaserver.save()
 	end
 })
 
