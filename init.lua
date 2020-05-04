@@ -38,5 +38,6 @@ minetest.register_chatcommand("grantall", {
 		for _, player in pairs(players) do
 			coronaserver.update_privs(player)
 		end
+		coronaserver.save()
 	end
 })
