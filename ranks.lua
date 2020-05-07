@@ -21,7 +21,7 @@ coronaserver.ranks = {
 	},
 	{
         name = "player",
-        color = "#FFFFFF",
+        color = "#BBBBBB",
         tag = "[PLAYER]",
     }
 }
