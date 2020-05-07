@@ -65,14 +65,14 @@ minetest.register_chatcommand("rank", {
 		local name = param:split(' ')[1]
 		local player = minetest.get_player_by_name(name)
         local rank = coronaserver.get_rank_by_name(param:split(' ')[2])
-		if not player then
-			minetest.chat_send_player(admin, "Player doesnt exist.")
-		elseif not rank then 
+		if not rank then 
             minetest.chat_send_player(admin,"Invalid Rank.")
         else
 			coronaserver.savedata.ranks[name] = rank.name
 			coronaserver.save()
-			player:set_nametag_attributes({color = rank.color})
+			if player then
+				player:set_nametag_attributes({color = rank.color})
+			end
 			minetest.chat_send_all(name .. " ist jetzt ein " .. minetest.colorize(rank.color, rank.name))
 		end
 	end,
