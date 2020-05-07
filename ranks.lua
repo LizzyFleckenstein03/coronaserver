@@ -22,7 +22,7 @@ coronaserver.ranks = {
 	{
         name = "player",
         color = "#FFFFFF",
-        tag = "",
+        tag = "[PLAYER]",
     }
 }
 coronaserver.savedata.ranks = coronaserver.savedata.ranks or {}
