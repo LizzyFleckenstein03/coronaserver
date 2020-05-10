@@ -15,6 +15,11 @@ coronaserver.ranks = {
 		tag = "[MODERATOR]",
 	},
 	{
+		name = "developer",
+		color = "#EBEE00",
+		tag = "[DEVELOPER]",
+	},
+	{
 		name = "supporter",
 		color = "#EE6E00",
 		tag = "[SUPPORTER]",
@@ -59,7 +64,7 @@ minetest.register_on_chat_message(function(name, message)
 end)
 minetest.register_chatcommand("rank", {
 	params = "<player> <rank>",
-	description = "Einem Spieler einen Rang geben (owner|admin|moderator|supporter)",
+	description = "Einem Spieler einen Rang geben (owner|admin|moderator|supporter|supporter|player)",
 	privs = {privs = true},
 	func = function(admin, param)
 		local name = param:split(' ')[1]
