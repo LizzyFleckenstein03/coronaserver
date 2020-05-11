@@ -25,14 +25,19 @@ coronaserver.ranks = {
 		tag = "[SUPPORTER]",
 	},
 	{
-        name = "player",
+        name = "teacher",
+        color = "#16AE00",
+        tag = "[TEACHER]",
+    },
+	{
+        name = "student",
         color = "#BBBBBB",
-        tag = "[PLAYER]",
+        tag = "[STUDENT]",
     }
 }
 coronaserver.savedata.ranks = coronaserver.savedata.ranks or {}
 function coronaserver.get_rank(name)
-    return coronaserver.get_rank_by_name(coronaserver.savedata.ranks[name] or "player")
+    return coronaserver.get_rank_by_name(coronaserver.savedata.ranks[name] or "student")
 end
 function coronaserver.get_rank_by_name(rankname)
 	for _, rank in pairs(coronaserver.ranks) do
@@ -51,6 +56,10 @@ function coronaserver.get_player_name(name, brackets)
 end
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
+	if coronaserver.get_rank(name).name == "student" and minetest.check_player_privs(name, {teacher = true}) then
+		coronaserver.savedata.ranks[name] = "teacher"
+		coronaserver.save()
+	end
     minetest.chat_send_all(coronaserver.get_player_name(name) .. "has joined the Server.")
     player:set_nametag_attributes({color = coronaserver.get_rank(name).color})
 end)
@@ -64,7 +73,7 @@ minetest.register_on_chat_message(function(name, message)
 end)
 minetest.register_chatcommand("rank", {
 	params = "<player> <rank>",
-	description = "Einem Spieler einen Rang geben (owner|admin|moderator|supporter|supporter|player)",
+	description = "Einem Spieler einen Rang geben (owner|admin|moderator|developer|supporter|teacher|student)",
 	privs = {privs = true},
 	func = function(admin, param)
 		local name = param:split(' ')[1]
