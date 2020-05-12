@@ -76,11 +76,11 @@ minetest.register_chatcommand("rank", {
 	description = "Einem Spieler einen Rang geben (owner|admin|moderator|developer|supporter|teacher|student)",
 	privs = {privs = true},
 	func = function(admin, param)
-		local name = param:split(' ')[1]
+		local name = param:split(' ')[1] or ""
 		local player = minetest.get_player_by_name(name)
         local rank = coronaserver.get_rank_by_name(param:split(' ')[2])
 		if not rank then 
-            minetest.chat_send_player(admin,"Invalid Rank.")
+            minetest.chat_send_player(admin, "Invalid Rank.")
         else
 			coronaserver.savedata.ranks[name] = rank.name
 			coronaserver.save()
