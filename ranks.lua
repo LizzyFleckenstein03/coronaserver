@@ -31,7 +31,6 @@ coronaserver.ranks = {
 		tag = "[DEVELOPER]",
 		privs = {privs = true},
 	},
-	},
 	{
 		name = "moderator",
 		color = "#001FFF",
