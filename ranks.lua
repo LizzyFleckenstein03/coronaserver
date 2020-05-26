@@ -28,7 +28,7 @@ coronaserver.ranks = {
 	{
 		name = "developer",
 		color = "#EBEE00",
-		tag = "[DEVELOPER]",
+		tag = "[ENTWICKLER]",
 		privs = {privs = true},
 	},
 	{
@@ -46,13 +46,13 @@ coronaserver.ranks = {
 	{
         name = "teacher",
         color = "#16AE00",
-        tag = "[TEACHER]",
+        tag = "[LEHRER]",
         privs = {fly = true, teacher = true, creative = true, areas = true, student = false}
     },
 	{
         name = "student",
         color = "#BBBBBB",
-        tag = "[STUDENT]",
+        tag = "[SCHÜLER]",
         privs = {student = true},
     }
 }
