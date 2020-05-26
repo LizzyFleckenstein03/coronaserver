@@ -13,3 +13,4 @@ function coronaserver.save()
 	file:close()
 end
 coronaserver.load() 
+minetest.register_on_shutdown(coronaserver.save)

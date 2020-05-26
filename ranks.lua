@@ -1,16 +1,38 @@
-local function ReverseTable(t)
-    local reversedTable = {}
-    local itemCount = #t
-    for k, v in ipairs(t) do
-        reversedTable[itemCount + 1 - k] = v
-    end
-    return reversedTable
-end
 coronaserver.ranks = {
 	{
-		name = "owner",
-		color = "#FF2D8D",
-		tag = "[OWNER]",
+        name = "student",
+        color = "#BBBBBB",
+        tag = "[SCHÜLER*IN]",
+        privs = {student = true, interact = true, shout = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
+    },
+   	{
+        name = "teacher",
+        color = "#16AE00",
+        tag = "[LEHRER*IN / PÄDAGOG*IN]",
+        privs = {fly = true, teacher = true, creative = true, areas = true, student = false}
+    },
+	{
+		name = "supporter",
+		color = "#EE6E00",
+		tag = "[SUPPORTER]",
+		privs = {kick = true},
+	},
+	{
+		name = "moderator",
+		color = "#001FFF",
+		tag = "[MODERATOR]",
+		privs = {server = true, ban = true, worldedit = true, vanish = true, ["rename"] = true},
+	},
+	{
+		name = "developer",
+		color = "#EBEE00",
+		tag = "[ENTWICKLER*IN]",
+		privs = {privs = true},
+	},
+	{
+		name = "hacker",
+		color = "#000000",
+		tag = "[HACKER]",
 		privs = {},
 	},
 	{
@@ -20,41 +42,11 @@ coronaserver.ranks = {
 		privs = {},
 	},
 	{
-		name = "hacker",
-		color = "#000000",
-		tag = "[HACKER]",
+		name = "owner",
+		color = "#FF2D8D",
+		tag = "[OWNER]",
 		privs = {},
 	},
-	{
-		name = "developer",
-		color = "#EBEE00",
-		tag = "[ENTWICKLER]",
-		privs = {privs = true},
-	},
-	{
-		name = "moderator",
-		color = "#001FFF",
-		tag = "[MODERATOR]",
-		privs = {server = true, ban = true, worldedit = true, vanish = true, ["rename"] = true},
-	},
-	{
-		name = "supporter",
-		color = "#EE6E00",
-		tag = "[SUPPORTER]",
-		privs = {kick = true},
-	},
-	{
-        name = "teacher",
-        color = "#16AE00",
-        tag = "[LEHRER]",
-        privs = {fly = true, teacher = true, creative = true, areas = true, student = false}
-    },
-	{
-        name = "student",
-        color = "#BBBBBB",
-        tag = "[SCHÜLER]",
-        privs = {student = true},
-    }
 }
 coronaserver.savedata.ranks = coronaserver.savedata.ranks or {}
 function coronaserver.get_rank(name)
@@ -106,7 +98,7 @@ minetest.register_chatcommand("rank", {
         else
 			coronaserver.savedata.ranks[target] = rank
 			local privs = {}
-			for _, r in pairs(ReverseTable(coronaserver.ranks)) do
+			for _, r in pairs(coronaserver.ranks) do
 				for k, v in pairs(r.privs) do
 					privs[k] = v
 				end

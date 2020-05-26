@@ -29,7 +29,6 @@ minetest.register_chatcommand("grantall", {
 	func = function(name, param)
 		table.insert(coronaserver.savedata.grantall, param)
 		coronaserver.update_privs_all()
-		coronaserver.save()
 	end
 })
 
@@ -40,7 +39,6 @@ minetest.register_chatcommand("revokeall", {
 	func = function(name, param)
 		table.insert(coronaserver.savedata.revokeall, param)
 		coronaserver.update_privs_all()
-		coronaserver.save()
 	end
 })
 
@@ -60,7 +58,6 @@ minetest.register_chatcommand("remove_from_allprivs", {
 		end
 		rmpriv(coronaserver.savedata.revokeall)
 		rmpriv(coronaserver.savedata.grantall)
-		coronaserver.save()
 	end
 })
 
