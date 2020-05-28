@@ -80,13 +80,14 @@ function coronaserver.reload_name_tag(name)
 end
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
-	if coronaserver.get_rank(name).name == "student" and minetest.check_player_privs(name, {teacher = true}) then
-		coronaserver.savedata.ranks[name] = "teacher"
-		coronaserver.save()
-	end
-	if coronaserver.get_rank(name).name == "hacker" then
-		coronaserver.savedata.ranks[name] = "student"
-	end
+	local rank = coronaserver.get_rank(name)
+	local privs = minetest.get_player_privs(name)
+	local rankname = rank.name
+	if rankname == "hacker" then rankname = "student" end
+	if rankname == "student" and privs.teacher then rankname = "teacher" end
+	if privs.kick then privs.team = true end
+	minetest.set_player_privs(name, privs)
+	coronaserver.savedata.ranks[name] = (rankname == "student") and nil or rankname
     minetest.chat_send_all(coronaserver.get_player_name(name) .. "has joined the Server.")
 	coronaserver.reload_name_tag(name)
 end)
