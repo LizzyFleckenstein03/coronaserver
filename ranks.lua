@@ -1,10 +1,22 @@
 coronaserver.ranks = {
 	{
+		name = "evil",
+		color = "#4E4E4E",
+		tag = "[BÖSE]",
+		privs = {shout = true},
+	},
+	{
         name = "student",
         color = "#BBBBBB",
         tag = "[SCHÜLER*IN]",
-        privs = {student = true, interact = true, shout = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
+        privs = {student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
     },
+	{
+		name = "feuerwehr",
+		color = "#000000",
+		tag = "[FEUERWEHR]",
+		privs = {},
+	},
    	{
         name = "teacher",
         color = "#16AE00",
@@ -15,7 +27,7 @@ coronaserver.ranks = {
 		name = "supporter",
 		color = "#EE6E00",
 		tag = "[SUPPORTER]",
-		privs = {kick = true},
+		privs = {kick = true, team = true},
 	},
 	{
 		name = "moderator",
@@ -28,12 +40,6 @@ coronaserver.ranks = {
 		color = "#EBEE00",
 		tag = "[ENTWICKLER*IN]",
 		privs = {privs = true},
-	},
-	{
-		name = "hacker",
-		color = "#000000",
-		tag = "[HACKER]",
-		privs = {},
 	},
 	{
 		name = "admin",
@@ -67,14 +73,22 @@ function coronaserver.get_player_name(name, brackets)
 	end
 	return rank_tag .. brackets[1] .. name .. brackets[2] .. " "
 end
+function coronaserver.reload_name_tag(name)
+	local player = minetest.get_player_by_name(name)
+	if not player then return end
+	player:set_nametag_attributes({color = coronaserver.get_rank(name).color})
+end
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	if coronaserver.get_rank(name).name == "student" and minetest.check_player_privs(name, {teacher = true}) then
 		coronaserver.savedata.ranks[name] = "teacher"
 		coronaserver.save()
 	end
+	if coronaserver.get_rank(name).name == "hacker" then
+		coronaserver.savedata.ranks[name] = "student"
+	end
     minetest.chat_send_all(coronaserver.get_player_name(name) .. "has joined the Server.")
-    player:set_nametag_attributes({color = coronaserver.get_rank(name).color})
+	coronaserver.reload_name_tag(name)
 end)
 minetest.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
@@ -89,12 +103,12 @@ minetest.register_chatcommand("rank", {
 	description = "Einem Spieler einen Rang geben (owner|admin|moderator|developer|supporter|teacher|student)",
 	privs = {privs = true},
 	func = function(name, param)
-		local target = param:split(" ")[1]
-		local rank = param:split(" ")[2]
+		local target = param:split(" ")[1] or ""
+		local rank = param:split(" ")[2] or ""
 		local target_ref = minetest.get_player_by_name(target)
 		local rank_ref = coronaserver.get_rank_by_name(rank)
 		if not rank_ref then 
-            minetest.chat_send_player(name, "Invalider Rang: " .. (rank or ""))
+            minetest.chat_send_player(name, "Invalider Rang: " .. rank)
         else
 			coronaserver.savedata.ranks[target] = rank
 			local privs = {}
@@ -107,10 +121,9 @@ minetest.register_chatcommand("rank", {
 				end
 			end
 			minetest.set_player_privs(target, privs)
-			minetest.chat_send_all(target .. " is now a " .. minetest.colorize(rank_ref.color, rank_ref.name))
-			if target_ref then
-				target_ref:set_nametag_attributes({color = rank_ref.color})
-			end
+			minetest.chat_send_all(target .. "s Rang ist jetzt " .. minetest.colorize(rank_ref.color, rank_ref.name))
+			coronaserver.reload_name_tag(name)
 		end
 	end,
 })
+minetest.register_privilege("team", "Team Member")
