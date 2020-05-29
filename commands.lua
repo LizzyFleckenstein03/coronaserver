@@ -74,3 +74,19 @@ minetest.register_chatcommand("message", {
         coronaserver.message(param)
 	end,
 })
+
+minetest.register_chatcommand("creator", {
+	privs = {server = true},
+	description = "Den Ersteller des Items anzeigen, was man in der Hand hat, wenn es im Kreativmodus erstellt wurde",
+	func = function(name)
+		local player = minetest.get_player_by_name(name)
+		if not player then return end
+		local itemstack = player:get_wielded_item()
+		if not itemstack then return false, "Du hast gereade kein Item in der Hand" end
+		local meta = itemstack:get_meta()
+		local creator = meta:get_string("creator")
+		if creator == "" then return false, "Dieses Item wurde nicht im Kreativmodus erstellt" end
+		return true, creator .. " hat dieses Item erstellt"
+	end
+})
+
