@@ -8,7 +8,7 @@ coronaserver.ranks = {
 	{
         name = "student",
         color = "#BBBBBB",
-        tag = "[SCHÜLER*IN]",
+        tag = "[SPIELER*IN]",
         privs = {student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
     },
 	{
@@ -21,7 +21,7 @@ coronaserver.ranks = {
         name = "teacher",
         color = "#16AE00",
         tag = "[LEHRER*IN / PÄDAGOG*IN]",
-        privs = {fly = true, teacher = true, creative = true, areas = true, student = false}
+        privs = {fly = true, teacher = true, creative = true, areas = true, student = false, basic_privs = true}
     },
 	{
 		name = "supporter",
