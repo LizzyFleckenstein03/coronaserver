@@ -17,11 +17,17 @@ coronaserver.ranks = {
 		tag = "[FEUERWEHR]",
 		privs = {},
 	},
+	{
+		name = "psupporter",
+		color = "#FF9C48",
+		tag = "[PROBE-SUPPORTER]",
+		privs = {team = true, student = false,},
+	},
    	{
         name = "teacher",
         color = "#16AE00",
         tag = "[LEHRER*IN / PÄDAGOG*IN]",
-        privs = {fly = true, teacher = true, creative = true, areas = true, student = false, basic_privs = true}
+        privs = {team = false, fly = true, teacher = true, creative = true, areas = true,  basic_privs = true}
     },
 	{
 		name = "supporter",
