@@ -129,7 +129,7 @@ minetest.register_chatcommand("rank", {
 			end
 			minetest.set_player_privs(target, privs)
 			minetest.chat_send_all(target .. "s Rang ist jetzt " .. minetest.colorize(rank_ref.color, rank_ref.name))
-			coronaserver.reload_name_tag(name)
+			coronaserver.reload_name_tag(target)
 		end
 	end,
 })
