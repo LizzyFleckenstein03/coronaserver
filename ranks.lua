@@ -12,6 +12,12 @@ coronaserver.ranks = {
         privs = {student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
     },
 	{
+        name = "vip",
+        color = "#CD4D00",
+        tag = "[VIP]",
+        privs = {},
+    },
+	{
 		name = "feuerwehr",
 		color = "#000000",
 		tag = "[FEUERWEHR]",
