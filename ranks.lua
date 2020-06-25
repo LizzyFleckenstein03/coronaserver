@@ -109,6 +109,7 @@ minetest.register_on_leaveplayer(function(player)
 end)
 minetest.register_on_chat_message(function(name, message)
     minetest.chat_send_all(coronaserver.get_player_name(name, {"<", ">"}) .. message)
+    minetest.log("[CHAT] <" .. name .. "> " .. message)
     return true
 end)
 minetest.register_chatcommand("rank", {
