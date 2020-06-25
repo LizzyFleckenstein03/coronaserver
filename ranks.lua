@@ -13,7 +13,7 @@ coronaserver.ranks = {
     },
 	{
         name = "vip",
-        color = "#CD4D00",
+        color = "#00E5FF",
         tag = "[VIP]",
         privs = {},
     },
