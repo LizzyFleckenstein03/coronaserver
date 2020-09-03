@@ -90,3 +90,21 @@ minetest.register_chatcommand("creator", {
 	end
 })
 
+minetest.register_chatcommand("hp", {
+	params = "<name> <value>",
+	description = "Set health of <name> to <value> hitpoints",
+	privs = {ban=true},
+	func = function(name, param)
+		local found, _, target, value = param:find("^([^%s]+)%s+(%d+)$")
+		if found == nil then
+			minetest.chat_send_player(name, "Invalid usage: " .. param)
+			return
+		end
+		local player = minetest.get_player_by_name(target)
+		if player then
+			player:set_hp(value)
+		else
+			minetest.chat_send_player(name, "Invalid target: " .. target)
+		end
+	end
+})
