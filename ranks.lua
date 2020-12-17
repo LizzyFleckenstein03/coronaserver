@@ -33,7 +33,7 @@ coronaserver.ranks = {
         name = "teacher",
         color = "#16AE00",
         tag = "[LEHRER*IN / PÄDAGOG*IN]",
-        privs = {team = false, fly = true, teacher = true, creative = true, areas = true,  basic_privs = true, teleport = true}
+        privs = {team = false, fly = true, teacher = true, creative = true, areas = true,  basic_privs = true, teleport = true, bring = true}
     },
 	{
 		name = "supporter",
