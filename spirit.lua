@@ -1,8 +1,6 @@
 local spirit = false
-function coronaserver.spirit(name)
-	local player = minetest.get_player_by_name(name)
-	if not player then return end
-	local pos = player:get_pos()
+
+function coronaserver.spirit(player)
 	minetest.add_particlespawner({
 		amount = 50,
 		time = 2,
@@ -19,20 +17,22 @@ function coronaserver.spirit(name)
 		collisiondetection = true,
 		vertical = false,
 		texture = "fire_basic_flame.png",
-		
+		attached = player,
 	})
-	minetest.after(0.5, function() coronaserver.spirit(name) end)
 end
+
 minetest.register_on_joinplayer(function(player)
-	if spirit then coronaserver.spirit(player:get_player_name()) end
+	if spirit then
+		coronaserver.spirit(player)
+	end
 end)
+
 minetest.register_chatcommand("spirit", {
 	privs = {server = true},
 	func = function()
 		spirit = true
-		local players = minetest.get_connected_players()
-		for _, player in pairs(players) do
-			coronaserver.spirit(player:get_player_name())
+		for _, player in pairs(minetest.get_connected_players()) do
+			coronaserver.spirit(player)
 		end
 	end
 })
