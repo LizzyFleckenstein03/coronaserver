@@ -6,8 +6,8 @@ function coronaserver.spirit(name)
 	minetest.add_particlespawner({
 		amount = 50,
 		time = 2,
-		minpos = vector.add(pos, {x = -0.1, y = 2, z = -0.1}),
-		maxpos = vector.add(pos, {x =  0.1, y = 3, z =  0.1}),
+		minpos = {x = -0.1, y = 0, z = -0.1},
+		maxpos = {x =  0.1, y = 1, z =  0.1},
 		minvel = {x = -0.1, y = 0, z = -0.1},
 		maxvel = {x =  0.1, y = 0, z = -0.1},
 		minacc = {x = -0.1, y = 5, z = -0.1},
@@ -16,9 +16,10 @@ function coronaserver.spirit(name)
 		maxexptime = 1,
 		minsize = 5,
 		maxsize = 7,
-		collisiondetection = false,
+		collisiondetection = true,
 		vertical = false,
 		texture = "fire_basic_flame.png",
+		
 	})
 	minetest.after(0.5, function() coronaserver.spirit(name) end)
 end

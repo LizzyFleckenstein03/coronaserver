@@ -6,17 +6,23 @@ coronaserver.ranks = {
 		privs = {shout = true},
 	},
 	{
-        name = "student",
-        color = "#BBBBBB",
-        tag = "[SPIELER*IN]",
-        privs = {student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
-    },
+		name = "student",
+		color = "#BBBBBB",
+		tag = "[SPIELER:IN]",
+		privs = {student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
+	},
 	{
-        name = "vip",
-        color = "#00E5FF",
-        tag = "[VIP]",
-        privs = {},
-    },
+		name = "chatmod",
+		color = "#93E3D6",
+		tag = "[CHATMODERATOR:IN]",
+		privs = {},
+	},
+	{
+		name = "vip",
+		color = "#00E5FF",
+		tag = "[VIP]",
+		privs = {},
+	},
 	{
 		name = "feuerwehr",
 		color = "#000000",
@@ -26,31 +32,31 @@ coronaserver.ranks = {
 	{
 		name = "psupporter",
 		color = "#FF9C48",
-		tag = "[PROBE-SUPPORTER]",
+		tag = "[PROBE-SUPPORTER:IN]",
 		privs = {team = true, student = false,},
 	},
    	{
-        name = "teacher",
-        color = "#16AE00",
-        tag = "[LEHRER*IN / PÄDAGOG*IN]",
-        privs = {team = false, fly = true, teacher = true, creative = true, areas = true,  basic_privs = true, teleport = true, bring = true, settime = true}
-    },
+		name = "teacher",
+		color = "#16AE00",
+		tag = "[LEHRER:IN / PÄDAGOG:IN]",
+		privs = {team = false, fly = true, teacher = true, creative = true, areas = true,  basic_privs = true, teleport = true, bring = true, settime = true}
+	},
 	{
 		name = "supporter",
 		color = "#EE6E00",
-		tag = "[SUPPORTER]",
+		tag = "[SUPPORTER:IN]",
 		privs = {kick = true, team = true},
 	},
 	{
 		name = "moderator",
 		color = "#001FFF",
-		tag = "[MODERATOR]",
+		tag = "[MODERATOR:IN]",
 		privs = {server = true, ban = true, worldedit = true, vanish = true, ["rename"] = true},
 	},
 	{
 		name = "developer",
 		color = "#EBEE00",
-		tag = "[ENTWICKLER*IN]",
+		tag = "[ENTWICKLER:IN]",
 		privs = {privs = true},
 	},
 	{
@@ -68,7 +74,7 @@ coronaserver.ranks = {
 }
 coronaserver.savedata.ranks = coronaserver.savedata.ranks or {}
 function coronaserver.get_rank(name)
-    return coronaserver.get_rank_by_name(coronaserver.savedata.ranks[name] or "student")
+	return coronaserver.get_rank_by_name(coronaserver.savedata.ranks[name] or "student")
 end
 function coronaserver.get_rank_by_name(rankname)
 	for _, rank in pairs(coronaserver.ranks) do
@@ -78,9 +84,9 @@ function coronaserver.get_rank_by_name(rankname)
 	end
 end
 function coronaserver.get_player_name(name, brackets)
-    local rank = coronaserver.get_rank(name)
-    local rank_tag = minetest.colorize(rank.color, rank.tag)
-	if not brackets then 
+	local rank = coronaserver.get_rank(name)
+	local rank_tag = minetest.colorize(rank.color, rank.tag)
+	if not brackets then
 		brackets = {"",""}
 	end
 	return rank_tag .. brackets[1] .. name .. brackets[2] .. " "
@@ -100,17 +106,17 @@ minetest.register_on_joinplayer(function(player)
 	if privs.kick then privs.team = true end
 	minetest.set_player_privs(name, privs)
 	coronaserver.savedata.ranks[name] = (rankname == "student") and nil or rankname
-    minetest.chat_send_all(coronaserver.get_player_name(name) .. "has joined the Server.")
+	minetest.chat_send_all(coronaserver.get_player_name(name) .. "has joined the Server.")
 	coronaserver.reload_name_tag(name)
 end)
 minetest.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
-    minetest.chat_send_all(coronaserver.get_player_name(name) .. "has left the Server.")
+	minetest.chat_send_all(coronaserver.get_player_name(name) .. "has left the Server.")
 end)
 minetest.register_on_chat_message(function(name, message)
-    minetest.chat_send_all(coronaserver.get_player_name(name, {"<", ">"}) .. message)
-    minetest.log("[CHAT] <" .. name .. "> " .. message)
-    return true
+	minetest.chat_send_all(coronaserver.get_player_name(name, {"<", ">"}) .. message)
+	minetest.log("[CHAT] <" .. name .. "> " .. message)
+	return true
 end)
 minetest.register_chatcommand("rank", {
 	params = "<player> <rank>",
@@ -121,9 +127,9 @@ minetest.register_chatcommand("rank", {
 		local rank = param:split(" ")[2] or ""
 		local target_ref = minetest.get_player_by_name(target)
 		local rank_ref = coronaserver.get_rank_by_name(rank)
-		if not rank_ref then 
-            minetest.chat_send_player(name, "Invalider Rang: " .. rank)
-        else
+		if not rank_ref then
+			minetest.chat_send_player(name, "Invalider Rang: " .. rank)
+		else
 			coronaserver.savedata.ranks[target] = rank
 			local privs = {}
 			for _, r in pairs(coronaserver.ranks) do
