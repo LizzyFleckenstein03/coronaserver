@@ -66,6 +66,12 @@ coronaserver.ranks = {
 		privs = {},
 	},
 	{
+		name = "live",
+		color = "#8D0600",
+		tag = "[LIVE - TWITCH]",
+		privs = {},
+	},
+	{
 		name = "owner",
 		color = "#FF2D8D",
 		tag = "[OWNER]",
