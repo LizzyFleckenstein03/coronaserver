@@ -83,9 +83,9 @@ function coronaserver.get_rank(name)
 	return coronaserver.get_rank_by_name(coronaserver.savedata.ranks[name] or "student")
 end
 function coronaserver.get_rank_by_name(rankname)
-	for _, rank in pairs(coronaserver.ranks) do
+	for i, rank in pairs(coronaserver.ranks) do
 		if rank.name == rankname then
-			return rank
+			return rank, i
 		end
 	end
 end
