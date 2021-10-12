@@ -7,7 +7,7 @@ controls.register_on_press(function(player, key)
 		for i, p in pairs(players) do
 			local n = p:get_player_name()
 			local info = minetest.get_player_information(n)
-			if info then
+			if info and info.avg_rtt then
 				local ping = math.max(1, math.ceil(4 - info.avg_rtt * 4))
 				list[#list + 1] = player:hud_add({
 					hud_elem_type = "text",
