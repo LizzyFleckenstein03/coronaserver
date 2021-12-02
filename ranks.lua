@@ -12,6 +12,12 @@ coronaserver.ranks = {
 		privs = {student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
 	},
 	{
+		name = "eventmanager",
+		color = "#FF362D",
+		tag = "[EVENT-MANAGER:IN]",
+		privs = {},
+	},
+	{
 		name = "chatmod",
 		color = "#93E3D6",
 		tag = "[CHATMODERATOR:IN]",
