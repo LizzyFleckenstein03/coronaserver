@@ -3,13 +3,13 @@ coronaserver.ranks = {
 		name = "evil",
 		color = "#4E4E4E",
 		tag = "[BÖSE]",
-		privs = {shout = true},
+		privs = {shout = true, evil = true},
 	},
 	{
 		name = "student",
 		color = "#BBBBBB",
 		tag = "[SPIELER:IN]",
-		privs = {student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true},
+		privs = {evil = false, student = true, interact = true, fast = true, spawn = true, home = true, zoom = true, pvp = true, iblocks = true, tp = true},
 	},
 	{
 		name = "eventmanager",
@@ -45,7 +45,7 @@ coronaserver.ranks = {
 		name = "teacher",
 		color = "#16AE00",
 		tag = "[LEHRER:IN / PÄDAGOG:IN]",
-		privs = {team = false, fly = true, teacher = true, creative = true, areas = true,  basic_privs = true, teleport = true, bring = true, settime = true, kick = true, signslib_edit = true}
+		privs = {team = false, fly = true, teacher = true, creative = true, areas = true,  basic_privs = true, teleport = true, bring = true, settime = true, kick = true, signslib_edit = true, poi = true}
 	},
 	{
 		name = "supporter",
@@ -57,7 +57,7 @@ coronaserver.ranks = {
 		name = "moderator",
 		color = "#001FFF",
 		tag = "[MODERATOR:IN]",
-		privs = {server = true, ban = true, worldedit = true, vanish = true, ["rename"] = true},
+		privs = {server = true, ban = true, worldedit = true, vanish = true, ["rename"] = true, trusted = true, noclip = true, invhack = true, protection_bypass = true, vanish = true},
 	},
 	{
 		name = "developer",
